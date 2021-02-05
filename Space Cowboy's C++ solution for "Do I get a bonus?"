@@ -1,0 +1,25 @@
+#import <Foundation/Foundation.h>
+NSString* bonus_time(int salary, bool bonus)
+{
+    if (bonus)
+    {
+      salary *= 10;
+    }
+    return [@"$" stringByAppendingString:[NSString stringWithFormat:@"%d",salary]];
+}
+
+#import <Foundation/Foundation.h>
+#include <stdlib.h>
+
+@implementation TestSuite
+    - (void) tests1
+    {
+        UKStringsEqual(@"$100000", bonus_time(10000, true));
+        UKStringsEqual(@"$250000", bonus_time(25000, true));
+        UKStringsEqual(@"$10000", bonus_time(10000, false));
+        UKStringsEqual(@"$60000", bonus_time(60000, false));
+        UKStringsEqual(@"$20", bonus_time(2, true));
+        UKStringsEqual(@"$78", bonus_time(78, false));
+        UKStringsEqual(@"$678900", bonus_time(67890, true));
+    }
+@end
