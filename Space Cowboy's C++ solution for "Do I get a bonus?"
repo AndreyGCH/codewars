@@ -1,3 +1,7 @@
+C++ solution
+https://www.codewars.com/kata/reviews/578f7a1eb63af1ad2c00021c/groups/579a6b157cb1f35cf7000288
+
+Objective-C solution
 #import <Foundation/Foundation.h>
 NSString* bonus_time(int salary, bool bonus)
 {
