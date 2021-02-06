@@ -1,0 +1,21 @@
+Link
+https://www.codewars.com/kata/reviews/5bce77c77fb02a220a00137d/groups/5bce77c87fb02a220a001381
+
+Solution
+
+#import <Foundation/Foundation.h>
+NSString* get_char(int i) {
+  return  [NSString stringWithFormat:@"%c", i];
+}
+
+Test 
+
+#import <Foundation/Foundation.h>
+#include <stdlib.h>
+
+@implementation TestSuite
+    - (void) tests1
+    {
+        UKStringsEqual(@"A", get_char(65));
+    }
+@end
