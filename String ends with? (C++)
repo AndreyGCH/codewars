@@ -1,0 +1,29 @@
+LINK
+https://www.codewars.com/kata/reviews/5c7f16c7ecdbb90001f84aba/groups/601e04a76aef7e0001c6e738
+
+SOLUTION
+#import <Foundation/Foundation.h>
+
+bool solution(NSString* str, NSString* ending) {
+    
+  int ending_size = [ending length];
+  int str_size = [str length];
+  NSString* str_splited = @"";
+  
+  for(int i = str_size-ending_size; i < str_size ; i++){
+    str_splited = [str_splited stringByAppendingString: [NSString stringWithFormat:@"%c",[str characterAtIndex:i]]];
+  }
+  
+  return [str_splited isEqualToString:ending]? true : false;
+}
+
+TEST
+
+#import <Foundation/Foundation.h>
+#include <stdlib.h>
+@implementation TestSuite
+    - (void) tests1
+    {
+        UKTrue(solution(@"samurai", @"ai"));
+    }
+@end
