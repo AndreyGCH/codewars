@@ -1,0 +1,36 @@
+LINK
+https://www.codewars.com/kata/reviews/5b339248f94d46d5cd001de1/groups/5c75b48b3226d000010d89b2
+
+
+SOLUTION
+
+#import <Foundation/Foundation.h>
+int get_average(int vector[])
+{
+  int average = 0;
+  int value = 0;
+  int pos = 0;
+  for (int i = 0; i < 4; ++i){ 
+    value += vector[i];
+  }
+  value = value / (sizeof(vector) / 2);
+  return value;
+}
+
+TEST
+
+#import <Foundation/Foundation.h>
+#include <stdlib.h>
+
+@implementation TestSuite
+    - (void) tests1
+    {
+        int arr[4];
+        arr[0] = 2;
+        arr[1] = 2;
+        arr[2] = 2;
+        arr[3] = 2;
+        
+        UKIntsEqual(2, get_average(arr));
+    }
+@end
