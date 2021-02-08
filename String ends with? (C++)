@@ -1,6 +1,8 @@
 LINK
 https://www.codewars.com/kata/reviews/5c7f16c7ecdbb90001f84aba/groups/601e04a76aef7e0001c6e738
 
+**** Objective C ****
+
 SOLUTION
 #import <Foundation/Foundation.h>
 
@@ -27,3 +29,77 @@ TEST
         UKTrue(solution(@"samurai", @"ai"));
     }
 @end
+
+
+**** C++ ****
+
+SOLUTION
+
+bool solution(std::string const &str, std::string const &ending) {
+    
+    int ending_size = ending.size();
+    int str_size = str.size();
+    std::string str_splited = "";
+    if(ending_size){
+      for(int i = str_size-ending_size; i < str_size ; i++){
+          str_splited += str[i];
+      }
+    }
+  return str_splited == ending? true : false;
+}
+
+TEST
+
+#include <random>
+
+Describe(Tests)
+{
+  It(Sample_Test_Cases)
+  {
+    Assert::That(solution("samurai", "ai"), Equals(true));
+    Assert::That(solution("sumo", "omo"), Equals(false));
+    Assert::That(solution("ninja", "ja"), Equals(true));
+    Assert::That(solution("sensei", "i"), Equals(true));
+    Assert::That(solution("samurai", "ra"), Equals(false));
+    Assert::That(solution("abc", "abcd"), Equals(false));
+    Assert::That(solution("abc", "abc"), Equals(true));
+    Assert::That(solution("abcabc", "bc"), Equals(true));
+    Assert::That(solution("abc", ""), Equals(true));
+    Assert::That(solution(":-)", ":-("), Equals(false));
+    Assert::That(solution("!@#$%^&*() :-)", ":-)"), Equals(true));
+    Assert::That(solution("abc\n", "abc"), Equals(false));
+  }
+  It(Random_Test_Cases)
+  {
+    for(int i = 0; i < 200; i++)
+    {
+      std::string str = make_word(1, 10);
+      std::string ending = make_word(1, 10);
+      Assert::That(solution(str, ending), Equals(sol(str, ending)));
+    }
+  }
+  
+  std::string make_word(int min, int max)
+  {
+    std::random_device rd;  //Will be used to obtain a seed for the random number engine
+    std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+    std::uniform_real_distribution<> dis(0.0, 1.0);
+  
+    std::string possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    int length = ceil((dis(gen) * max) + min);
+    std::string word = "";
+    
+    for(int i = 0; i < length; i++)
+      word += possible[floor(dis(gen) * possible.size())];
+      
+    return word;
+  }
+  
+  bool sol(std::string const &str, std::string const &ending) {
+    if (str.length() >= ending.length()) {
+        return (0 == str.compare (str.length() - ending.length(), ending.length(), ending));
+    } else {
+        return false;
+    }
+  }
+};
