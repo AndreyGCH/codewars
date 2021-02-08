@@ -2,6 +2,8 @@ Exercise 6
 LINK
 https://www.codewars.com/kata/reviews/5d5ee4d8ad2c6800010dc1a5/groups/601e39698166a10001cd9130
 
+**** Objective C ****
+
 SOLUTION
 
 #import <Foundation/Foundation.h>
@@ -43,4 +45,75 @@ TEST
         UKIntsEqual(76, sum_of_minimums(arr));
     }
 @end
+
+**** C++ ****
+
+Solution
+
+#include <vector>
+
+int sum_of_minimums(const std::vector<std::vector<int>> &numbers)
+{
+    
+    int rows = numbers.size();
+    int min = 0;
+    int sum = 0;
+    for (int i = 0; i < rows; i++){
+      min = numbers[i][0];
+      for (int y = 0; y < numbers[i].size(); y++){
+        std::cout << numbers[i][y];
+        if(numbers[i][y] < min){
+          min = numbers[i][y];
+        }
+      }
+      sum += min;
+    }
+  return sum;
+}
+
+Test
+
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
+#include <ctime>
+#include <random>
+using namespace std;
+Describe(Minimum_Sum)
+{
+    std::vector<vector<int>> create_random(int &rows,int &cols){
+ std::vector<vector<int>> random;
+for(int i=0;i<rows;i++){
+    std::vector<int> temp;
+    for(int j=0;j<cols;j++)
+        temp.push_back(rand()% 150);
+    random.push_back(temp);
+}
+    return random;
+}
+int solOfSumOfMinimums(std::vector<vector<int>>& numbers){
+    int sum = 0;
+for(size_t i=0;i<numbers.size();i++)
+    sum += *min_element(numbers[i].begin(),numbers[i].end());
+return sum;
+}
+   It(Fixed_Tests)
+    {
+        std::vector<vector<int>> test = {{7,9,8,6,2},{6,3,5,4,3},{5,8,7,4,5}};
+        Assert::That(sum_of_minimums(test), Equals(9));
+        test = { {11,12,14,54}, {67,89,90,56}, {7,9,4,3}, {9,8,6,7}};
+        Assert::That(sum_of_minimums(test), Equals(76));
+    }
+    It(Random_Test)
+    {
+    srand(time(0));
+         for(size_t i=0;i<50;i++){
+    int rows = rand() % 5 + 2;
+    int columns = rand() % 5 + 2;
+    vector<vector<int>> random = create_random(rows,columns);
+    int expec = solOfSumOfMinimums(random);
+    Assert::That(sum_of_minimums(random), Equals(expec));
+    }
+    }
+};
 
