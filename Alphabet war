@@ -1,0 +1,68 @@
+Exercise 5
+
+LINK
+https://www.codewars.com/kata/59377c53e66267c8f6000027/solutions/cpp/me/best_practice
+
+SOLUTION
+
+#import <Foundation/Foundation.h>
+
+
+NSString* alphabetWar(NSString* fight)
+{
+  int right = 0;
+  int left = 0;
+  int size = [fight length];
+  NSString* result = @"";
+  for(int i = 0; i < size; i++){
+    switch([fight characterAtIndex:i]){
+      case 'w':
+        left += 4;
+        break;
+      case 'p':
+        left += 3;
+        break;
+      case 'b':
+        left += 2;
+        break;
+      case 's':
+        left += 1;
+        break;
+      case 'm':
+        right += 4;
+        break;
+      case 'q':
+        right += 3;
+        break;
+      case 'd':
+        right += 2;
+        break;
+      case 'z':
+        right += 1;
+        break;
+    }
+  }
+  if(right == left){
+    result = @"Let's fight again!";
+  }else if(right > left){
+    result = @"Right side wins!";
+  }else{
+    result = @"Left side wins!";
+  }
+  return result;
+}
+
+TEST
+
+#import <Foundation/Foundation.h>
+#include <stdlib.h>
+
+@implementation TestSuite
+    - (void) tests1
+    {
+        UKStringsEqual(@"Right side wins!", alphabetWar(@"z"));
+        UKStringsEqual(@"Let's fight again!", alphabetWar(@"zdqmwpbs"));
+        UKStringsEqual(@"Right side wins!", alphabetWar(@"zzzzs"));
+        UKStringsEqual(@"Left side wins!", alphabetWar(@"wwwwww"));
+    }
+@end
