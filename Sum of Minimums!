@@ -1,0 +1,46 @@
+Exercise 6
+LINK
+https://www.codewars.com/kata/reviews/5d5ee4d8ad2c6800010dc1a5/groups/601e39698166a10001cd9130
+
+SOLUTION
+
+#import <Foundation/Foundation.h>
+
+int sum_of_minimums(NSArray* numbers)
+{
+    
+    int rows = [numbers count];
+    int min = 0;
+    int sum = 0;
+    NSLog(@"%d", rows);
+     NSLog(@"***");
+    for (int i = 0; i < rows; i++){
+      min = [numbers[i][0] integerValue];
+      NSLog(@"%d", min);
+      for (int y = 0; y < [[numbers objectAtIndex:i] count]; y++){
+        NSLog(@"%d", [numbers[i][y] integerValue]);
+        if([numbers[i][y] integerValue] < min){
+          min = [numbers[i][y] integerValue];
+        }
+      }
+      sum += min;
+      NSLog(@"***");
+    }
+  return sum;
+}
+
+TEST
+
+#import <Foundation/Foundation.h>
+#include <stdlib.h>
+
+@implementation TestSuite
+    - (void) tests1
+    {        
+        NSArray* arr = @[ @[ @7, @9, @8, @6, @2], @[ @6, @3, @5, @4, @3], @[ @5, @8, @7, @4, @5]];
+        UKIntsEqual(9, sum_of_minimums(arr));
+        arr = @[@[@11,@12,@14,@54], @[@67,@89,@90,@56], @[@7,@9,@4,@3], @[@9,@8,@6,@7]];
+        UKIntsEqual(76, sum_of_minimums(arr));
+    }
+@end
+
