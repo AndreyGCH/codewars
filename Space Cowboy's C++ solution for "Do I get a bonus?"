@@ -1,7 +1,10 @@
 C++ solution
 https://www.codewars.com/kata/reviews/578f7a1eb63af1ad2c00021c/groups/579a6b157cb1f35cf7000288
 
-Objective-C solution
+**** Objective C ****
+
+SOLUTION
+
 #import <Foundation/Foundation.h>
 NSString* bonus_time(int salary, bool bonus)
 {
@@ -11,6 +14,8 @@ NSString* bonus_time(int salary, bool bonus)
     }
     return [@"$" stringByAppendingString:[NSString stringWithFormat:@"%d",salary]];
 }
+
+TEST
 
 #import <Foundation/Foundation.h>
 #include <stdlib.h>
@@ -27,3 +32,58 @@ NSString* bonus_time(int salary, bool bonus)
         UKStringsEqual(@"$678900", bonus_time(67890, true));
     }
 @end
+
+**** C++ ****
+
+SOLUTION
+
+#include <string>
+using namespace std;
+
+string bonus_time(int salary, bool bonus)
+{
+    if (bonus)
+    {
+      salary *= 10;
+    }
+    
+    return "$" + to_string(salary);
+}
+
+TEST
+
+#include<string>
+using namespace std;
+
+Describe(Tests)
+{
+    It(ExampleTests)
+    {
+        Assert::That(bonus_time(10000, true), Equals("$100000"));
+        Assert::That(bonus_time(25000, true), Equals("$250000"));
+        Assert::That(bonus_time(10000, false), Equals("$10000"));
+        Assert::That(bonus_time(60000, false), Equals("$60000"));
+        Assert::That(bonus_time(2, true), Equals("$20"));
+        Assert::That(bonus_time(78, false), Equals("$78"));
+        Assert::That(bonus_time(67890, true), Equals("$678900"));
+    }
+    
+    It(RandomTests)
+    {
+        function<string (int, bool)> solution = [](int salary, bool bonus)
+        {
+            salary *= bonus ? 10 : 1;
+    
+            return "$" + to_string(salary);
+        };
+        
+        srand(time(0));
+        for(int i = 0; i < 100; i++)
+        {
+            int randomSalary = rand()%1000000;
+            bool randomBonus = rand()%2 == 0;
+            
+            Assert::That(bonus_time(randomSalary, randomBonus), Equals(solution(randomSalary, randomBonus)));
+        }
+    }
+};
