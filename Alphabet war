@@ -1,7 +1,8 @@
-Exercise 5
 
 LINK
 https://www.codewars.com/kata/59377c53e66267c8f6000027/solutions/cpp/me/best_practice
+
+**** Objective C ****
 
 SOLUTION
 
@@ -66,3 +67,108 @@ TEST
         UKStringsEqual(@"Left side wins!", alphabetWar(@"wwwwww"));
     }
 @end
+
+
+**** C++ ****
+
+SOLUTION
+
+#include <string>
+using namespace std;
+
+string alphabetWar(string fight)
+{
+  int right = 0;
+  int left = 0;
+  int size = fight.size();
+  std::string result = "";
+  for(int i = 0; i < size; i++){
+    switch(fight[i]){
+      case 'w':
+        left += 4;
+        break;
+      case 'p':
+        left += 3;
+        break;
+      case 'b':
+        left += 2;
+        break;
+      case 's':
+        left += 1;
+        break;
+      case 'm':
+        right += 4;
+        break;
+      case 'q':
+        right += 3;
+        break;
+      case 'd':
+        right += 2;
+        break;
+      case 'z':
+        right += 1;
+        break;
+    }
+  }
+  if(right == left){
+    result = "Let's fight again!";
+  }else if(right > left){
+    result = "Right side wins!";
+  }else{
+    result = "Left side wins!";
+  }
+  return result;
+}
+
+
+TEST
+
+#include <string>
+using namespace std;
+
+string aw(string fight)
+{
+    string power = "wpbs_zdqm";
+    int result =0;
+    
+    for ( unsigned int i=0; i<fight.length(); i++)
+      if ( power.find(fight[i]) != std::string::npos )
+         result += power.find(fight[i]) - 4;
+         
+    if (result == 0)
+        return "Let's fight again!";
+    else if (result < 0)
+        return "Left side wins!";
+    else
+        return "Right side wins!";
+}
+
+static const char alphanum[] =
+  "wpbszdqmabcdefghijklmnopqrstuvwxyzwpbszdqm";
+
+Describe(AlphabetWarTest)
+{
+    It(BasicTest)
+    {
+        Assert::That(alphabetWar("z"), Equals("Right side wins!"));
+        Assert::That(alphabetWar("zdqmwpbs"), Equals("Let's fight again!"));
+        Assert::That(alphabetWar("zzzzs"), Equals("Right side wins!"));
+        Assert::That(alphabetWar("wwwwww"), Equals("Left side wins!"));
+    }
+    
+    It(RandomTest)
+    {
+        for (unsigned int j= 0; j< 196; j++)
+        {
+            string Str;
+            for(unsigned int i = 0; i < j%30+1; ++i)
+            {
+                  Str += alphanum[rand() % (sizeof(alphanum) - 1)];
+            }
+            cout << endl<< "Fight: " << Str << endl <<
+               " => Expected result: " << aw(Str) << endl ; 
+            Assert::That(alphabetWar(Str), Equals(aw(Str)));
+        } 
+    }      
+    
+};
