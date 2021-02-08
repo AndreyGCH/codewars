@@ -1,7 +1,7 @@
 Link
 https://www.codewars.com/kata/reviews/5bce77c77fb02a220a00137d/groups/5bce77c87fb02a220a001381
 
-Objective C
+**** Objective C ****
 
 Solution
 
@@ -23,10 +23,22 @@ Test
 @end
 
 
-C++
+**** C++ ****
 
 Solution
 
 char get_char(int i) {
   return char(i);
 }
+
+Test
+
+Describe(extended_tests)
+{
+    It(should_work_from_32_to_126)
+    {
+        for(int i = 32; i < 126; ++i) {
+          Assert::That(get_char(i), Equals(char(i)));
+        }
+    }
+};
