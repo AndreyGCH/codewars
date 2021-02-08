@@ -1,6 +1,8 @@
 Link
 https://www.codewars.com/kata/reviews/5bce77c77fb02a220a00137d/groups/5bce77c87fb02a220a001381
 
+Objective C
+
 Solution
 
 #import <Foundation/Foundation.h>
@@ -19,3 +21,12 @@ Test
         UKStringsEqual(@"A", get_char(65));
     }
 @end
+
+
+C++
+
+Solution
+
+char get_char(int i) {
+  return char(i);
+}
